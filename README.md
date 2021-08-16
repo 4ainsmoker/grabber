@@ -8,7 +8,6 @@
 
 Данное задание необходимо выполнить с помощью Python.
 Для представления в виде word cloud можно использовать уже существующие библиотеки.
-Пример word cloud можно посмотреть по ссылке -
-https://altoona.psu.edu/sites/altoona/files/success-word-cloud.jpg
+Пример word cloud можно посмотреть по [ссылке](https://altoona.psu.edu/sites/altoona/files/success-word-cloud.jpg).
 ### Статус
 В процессе доработки
