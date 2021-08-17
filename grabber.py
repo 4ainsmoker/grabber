@@ -35,9 +35,9 @@ def grabber(url):
     if False:
         api_key = 'FORAPI' #ваш api
         r = requests.get(url + f'&apiKey={api_key}')
-        saveData(r, 'response')
+        saveData(r, 'request')
     else:
-        r = loadData('response.pickle')
+        r = loadData('request.pickle')
     json_text = json.loads(r.text)
 
     for obj in json_text['articles']:
