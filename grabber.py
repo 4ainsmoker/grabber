@@ -3,7 +3,9 @@ import json
 import pickle
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
+from nltk.stem import WordNetLemmatizer
 from wordcloud import WordCloud
+from nltk.stem import PorterStemmer
 import matplotlib.pyplot as plt
 
 
@@ -19,11 +21,12 @@ def loadData(filename: str):
 
 
 def textFilter(text: str):
+    #производим нормализацию через лемматизацию или стэмминг
+    normal = dict(lem=WordNetLemmatizer().lemmatize, stem=PorterStemmer().stem)
     #Cписок для отсчения конструкция can, when и т.д.
     stop_words = set(stopwords.words('english'))
-    # Производим токенизацию
-    word_tokens = word_tokenize(text)
-    return [word for word in word_tokens if word not in stop_words and word.isalpha() and word != 'chars']
+    # Производим токенизацию и нормализацию слов
+    return [normal['stem'](word) for word in word_tokenize(text) if word not in stop_words and word.isalpha() and word != 'chars']
 
 
 def grabber(url):
@@ -43,12 +46,9 @@ def grabber(url):
     filtered_text = textFilter(text)
 
     data_frequencies = {}
-
     for word in filtered_text:
         data_frequencies[word] = data_frequencies.get(word, 0) + 1
-
     result = dict(sorted(data_frequencies.items(), key=lambda i: i[1], reverse=True)[:50])
-    print(result)
     word_cloud = WordCloud(width=1920, height=1080, max_words=50, background_color="white", relative_scaling=1,
                            normalize_plurals=False).generate_from_frequencies(result)
     plt.imshow(word_cloud)
