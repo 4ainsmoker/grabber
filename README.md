@@ -26,7 +26,7 @@ def textFilter(text: str):
 ```
 Подсчет наиболее часто встречающихся слов:
 ```
-data_frequencies = {}
+    data_frequencies = {}
     for word in filtered_text:
         data_frequencies[word] = data_frequencies.get(word, 0) + 1
     result = dict(sorted(data_frequencies.items(), key=lambda i: i[1], reverse=True)[:50])
