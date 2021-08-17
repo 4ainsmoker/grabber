@@ -27,18 +27,18 @@ def textFilter(text: str):
 
 
 def grabber(url):
+    text = ""
+
     if False:
-        api_key = 0  # ваш api key
+        api_key = 'FORAPI' #ваш api
         r = requests.get(url + f'&apiKey={api_key}')
         saveData(r, 'request')
     else:
         r = loadData('request.pickle')
     json_text = json.loads(r.text)
-    # print(js)
-    text = ""
 
     for obj in json_text['articles']:
-        text += str(obj['content']).lower()
+        text += str(obj['description']).lower()
 
     filtered_text = textFilter(text)
 
@@ -57,5 +57,6 @@ def grabber(url):
 
 
 if __name__ == '__main__':
-    params = 'country=us&language=en&q=russia&from=2021-08-01'
+    #API разработчика позволяет получить только 100 страниц
+    params = 'language=en&q=russia&from=2021-08-01&pageSize=100'
     grabber(f'https://newsapi.org/v2/everything?{params}')
