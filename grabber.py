@@ -26,7 +26,7 @@ def textFilter(text: str):
     #Cписок для отсчения конструкция can, when и т.д.
     stop_words = set(stopwords.words('english'))
     # Производим токенизацию и нормализацию слов
-    return [normal['stem'](word) for word in word_tokenize(text) if word not in stop_words and word.isalpha() and word != 'chars']
+    return [normal['stem'](word) for word in word_tokenize(text) if word not in stop_words and word.isalpha()]
 
 
 def grabber(url):
